@@ -1,0 +1,75 @@
+<!--
+  PaymentSystem.csproj  —  .NET 9 Web API
+  Run:  dotnet restore && dotnet ef migrations add Init && dotnet ef database update
+-->
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>PaymentSystem</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Razorpay .NET SDK (official) -->
+    <PackageReference Include="Razorpay"                                     Version="3.*" />
+
+    <!-- EF Core + SQLite -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite"         Version="9.*" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design"          Version="9.*">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+
+    <!-- Swagger -->
+    <PackageReference Include="Swashbuckle.AspNetCore"                        Version="7.*" />
+  </ItemGroup>
+</Project>
+
+<!--
+═══════════════════════════════════════════════════════════
+  MIGRATION COMMANDS  (run from project root)
+═══════════════════════════════════════════════════════════
+
+  1. Add initial migration:
+     dotnet ef migrations add Init output-dir Data/Migrations
+
+  2. Apply to SQL Server:
+     dotnet ef database update
+
+  3. Generate SQL script (for production deploy):
+     dotnet ef migrations script output migrations.sql idempotent
+
+═══════════════════════════════════════════════════════════
+  NGROK WEBHOOK TUNNEL  (dev testing)
+═══════════════════════════════════════════════════════════
+
+  ngrok http 7001
+  → Copy the HTTPS forwarding URL
+  → Set in Razorpay Dashboard:
+      Webhook URL:  https://xxxx.ngrok.io/api/webhook/razorpay
+      Events:       virtual_account.credited
+      Secret:       <matches WebhookSecret in appsettings.json>
+
+═══════════════════════════════════════════════════════════
+  ANGULAR 21 SETUP
+═══════════════════════════════════════════════════════════
+
+  npm install
+  npx tailwindcss init  (if not already initialised)
+
+  In tailwind.config.js content array add:
+    "./src/**/*.{html,ts}"
+
+  In angular.json styles array add:
+    "@tailwind base; @tailwind components; @tailwind utilities;"
+  (or add to src/styles.css)
+
+  Provide HttpClient in app.config.ts:
+    provideHttpClient(withInterceptorsFromDi())
+
+  environment.ts:
+    export const environment = {
+      apiBaseUrl: 'https://localhost:7001'
+    };
+-->

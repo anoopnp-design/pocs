@@ -1,0 +1,16 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build Backend",
+      "type": "process",
+      "command": "dotnet",
+      "args": ["build", "${workspaceFolder}/trustpay/backend/PaymentSystem.csproj"],
+      "problemMatcher": "$msCompile",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}

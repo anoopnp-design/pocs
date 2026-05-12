@@ -1,0 +1,39 @@
+# --- .NET / C# Specific ---
+# Build outputs
+bin/
+obj/
+
+trustpay/backend/bin/
+trustpay/backend/obj/
+
+# NuGet packages cache (if not managed by a global cache)
+packages/
+
+# Visual Studio / Rider files
+*.suo
+*.user
+*.userosscache
+*.vspscc
+.vs/
+*.csproj.user
+*.sln.history
+
+# --- Angular Specific ---
+# Angular CLI generated files
+node_modules/
+/dist/
+/build/
+
+# Package manager lock files (already handled by package.json/package-lock.json but good to be explicit)
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# --- General / OS Specific ---
+.vscode/      # VS Code settings (optional, might want to keep recommended settings)
+.idea/        # JetBrains/IntelliJ/Rider settings (often used by IDEs)
+*.iml
+Thumbs.db
+.DS_Store
+
+.angular/
